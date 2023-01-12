@@ -3,7 +3,7 @@
 <h1>Overzivht Mankement</h1>
 <br>
 
-s
+
 <h2>Instructor Naam: <?= $data["instructorName"] ?></h2>
 <h2>Emailadres: <?= $data["Email"] ?></h2>
 <h2>Kenteken auto: <?= $data["Kenteken"] ?></h2>
