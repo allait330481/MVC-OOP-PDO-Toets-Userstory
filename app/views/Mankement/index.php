@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="public/css/style.css">
 
-<br>
 <h1>Overzivht Mankement</h1>
 <br>
 
@@ -21,6 +20,6 @@
 </table>
 <br>
 <br>
-<a href="<?= URLROOT; ?>/Mankement/addMankement/<?= $data['MankementId']  ?>">
+<a href="<?= URLROOT; ?>/Mankement/add">
     <input type="button" value="Onderwerp toevoegen">
 </a>

@@ -31,18 +31,12 @@ class MankementModel
     return $result;
   }
 
-  public function addMankement($post)
+  public function addMankement($Mankement, $AutoId, $Datum)
   {
-    $sql = "INSERT INTO Mankement (AutoId
-                                  ,Mankement)
-            VALUES                (:AutoId,
-                                   :Mankement);";
-
-    $this->db->query($sql);
-
-    $this->db->bind(':AutoId', $post['id'], PDO::PARAM_INT);
-    $this->db->bind(':Mankement', $post['Mankement'], PDO::PARAM_STR);
-
+    $this->db->query("INSERT INTO Mankement (Mankement, AutoId, Datum) VALUES (:Mankement, :AutoId, :Datum)");
+    $this->db->bind(':Mankement', $Mankement);
+    $this->db->bind(':AutoId', $AutoId, PDO::PARAM_INT);
+    $this->db->bind(':Datum', $Datum);
     return $this->db->execute();
   }
 }

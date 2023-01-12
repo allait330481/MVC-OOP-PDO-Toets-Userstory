@@ -1,7 +1,6 @@
 <?php
 class Mankement extends Controller
 {
-
   private $MankementModel;
 
   public function __construct()
@@ -11,20 +10,13 @@ class Mankement extends Controller
 
   public function index()
   {
-
-
     $result = $this->MankementModel->getMankements();
     $rows = "";
 
     foreach ($result as $Mankementinfo) {
-
-
       $rows .= "<tr>
-
                  <td>{$Mankementinfo->Datum}</td>
                  <td>{$Mankementinfo->Mankement}</td>
-
-
                 </tr>";
     }
     $data = [
@@ -33,38 +25,25 @@ class Mankement extends Controller
       'instructorName' => $result[0]->Naam,
       'Email' => $result[0]->Email,
       'Kenteken' => $result[0]->Kenteken
-
-
-
     ];
     $this->view('Mankement/index', $data);
   }
 
-
-
-  public function addMankement($id = NULL)
+  public function add()
   {
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-      $result = $this->MankementModel->addMankement($_POST);
-
-      if ($result) {
-        echo "<h3>de data is opgeslagen</h3>";
-        header('Refresh:3; url=' . URLROOT . '/Mankement/index');
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $Mankement = $_POST['Mankement'];
+      $AutoId = $_POST['AutoId'];
+      $Datum = date("Y-m-d H:i:s");
+      if ($this->MankementModel->addMankement($Mankement, $AutoId, $Datum)) {
+        header('Location: ' . URLROOT . '/Mankement');
+        exit();
       } else {
-        echo "<h3>de data is niet opgeslagen</h3>";
-        header('Refresh:3; url=' . URLROOT . '/Mankement/index');
+        die('Something went wrong');
       }
     } else {
-
-      $data = [
-        'title' => 'Onderwerp Toevoegen',
-        'id' => $id
-      ];
-
-      $this->view('Mankement/addMankement', $data);
+      $Mankement = "";
+      $this->view('Mankement/add', $Mankement);
     }
   }
 }
